@@ -33,7 +33,7 @@
 @Entry
 @Component
 struct Index {
-  @State message: string = 'Hello World'
+  @State message: string = 'aaa'
   build() {
     Row() {
       Column() {
