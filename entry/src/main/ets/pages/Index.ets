@@ -35,6 +35,9 @@
 struct Index {
   @State message: string = 'aaa'
   build() {
+
+    //tab组件写在index文件里面
+    //tabComponent要新建文件在Views里面
     Row() {
       Column() {
         Text(this.message)
