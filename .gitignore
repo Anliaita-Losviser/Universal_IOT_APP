@@ -9,3 +9,9 @@
 /.clang-format
 /.clang-tidy
 **/.test
+.DS_Store
+**/.DS_Store
+.DS_Store?
+._*
+**/._*
+._*?
