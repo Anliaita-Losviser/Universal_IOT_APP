@@ -58,9 +58,9 @@ class Item{
 @Component
 export struct home {
   private items: Array<Item> = [
-    new Item('数据1',$r('app.media.icon'),1,'pages/Page1','数据2',$r('app.media.icon'),2,'pages/Page2'),
-    new Item('数据3',$r('app.media.icon'),3,'pages/Page3','数据4',$r('app.media.icon'),4,'pages/Page4'),
-    new Item('数据5',$r('app.media.icon'),5,'pages/Page5','数据6',$r('app.media.icon'),6,'pages/Page6')
+    new Item('数据1',$r('app.media.startIcon'),1,'pages/Page1','数据2',$r('app.media.startIcon'),2,'pages/Page2'),
+    new Item('数据3',$r('app.media.startIcon'),3,'pages/Page3','数据4',$r('app.media.startIcon'),4,'pages/Page4'),
+    new Item('数据5',$r('app.media.startIcon'),5,'pages/Page5','数据6',$r('app.media.startIcon'),6,'pages/Page6')
   ]
   build() {
     Column({space: 30}){

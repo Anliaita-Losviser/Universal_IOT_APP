@@ -1,4 +1,4 @@
-import {Header} from '../compomets/CommonComponets'
+import {Header} from '../compomets/Headers'
 @Entry
 @Component
 struct Page2 {

@@ -88,33 +88,52 @@ struct Index {
   //       Text(this.sensor.humidity).fontSize(24)
   //       Text("%").fontSize(24)
   //     }.width(300).padding(8)
-
+  @State currentIndex: number = 0
+  private tabsController: TabsController = new TabsController()
   build() {
-    Tabs({ barPosition: BarPosition.End }) {
+    /**
+     * 底部的Tab栏组件
+     */
+    Tabs({ barPosition: BarPosition.End ,controller:this.tabsController}) {
+      //首页
       TabContent() {
         home()
-
       }
-      .tabBar(this.TabBuilder('首页', $r('app.media.icon'), 0))
-
+      .tabBar(this.TabBuilder('首页', 0, $r('app.media.house_fill'),$r('app.media.house')))
+      //我的
       TabContent() {
         Text('我的')
       }
-      .tabBar(this.TabBuilder('我的', $r('app.media.icon'), 1))
+      .tabBar(this.TabBuilder('我的', 1, $r('app.media.person_2_fill'), $r('app.media.person_2')))
     }
     .width('100%')
     .height('100%')
     .vertical(false)
+    .scrollable(false)
   }
 
-  @Builder
-  TabBuilder(title: string, image: ResourceStr, index: Number) {
-    Column({ space: 4 }) {
-      Image(image)
-        .width(25)
-        .height(25)
+  /**
+   *
+   * @param title：tab的标题
+   * @param targetIndex：目标页面
+   * @param selectedImg：选中状态的图片
+   * @param normalImg：未选中状态的图片
+   */
+  @Builder TabBuilder(title: ResourceStr, targetIndex: number, selectedImg: Resource, normalImg: Resource) {
+    Column() {
+      Image(this.currentIndex === targetIndex ? selectedImg : normalImg)
+        .size({ width: 25, height: 25 })
       Text(title)
     }
+    .width('100%')
+    .height(50)
     .justifyContent(FlexAlign.Center)
+    .onClick(() => {
+      /**
+       * tab组件的点击切换逻辑
+       */
+      this.currentIndex = targetIndex;
+      this.tabsController.changeIndex(this.currentIndex);
+    })
   }
 }
