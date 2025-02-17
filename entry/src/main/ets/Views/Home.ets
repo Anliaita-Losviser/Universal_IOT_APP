@@ -79,13 +79,8 @@ export struct home {
         alignItems: ItemAlign.Start }){
         ForEach(this.items,(item: Item) =>{
           Cards({name:item.name,
-<<<<<<< HEAD
             connentionState:item.connentionState,
             onClickFunc:item.onClickFunc})
-=======
-          connentionState:item.connentionState,
-          onClickFunc:item.onClickFunc})
->>>>>>> hm5.0
         },)
       }
       .width('100%')
