@@ -4,7 +4,7 @@ export struct Header{
   private title: ResourceStr
   build(){
     Row({space: 20}){
-      Image($r('app.media.back'))
+      Image($r('app.media.undo'))
         .width(30)
         .onClick(() =>{
           router.back()
