@@ -1,6 +1,8 @@
 import { MqttClient, MqttConnectOptions, MqttMessage, MqttResponse, MqttSubscribeOptions } from '@ohos/mqtt';
-import { JSON } from '@kit.ArkTS';
+import { JSON} from '@kit.ArkTS';
 import { MulSensor } from '../models/MulSensor';
+import {Options}from '@mcui/mccharts'
+import { dataQueue } from '../common/dataQueue';
 
 const UserName: string = "shmqtt";
 const Password: string = "12345678";
@@ -17,6 +19,9 @@ class MulSensorViewModel{
   password: Password,
   connectTimeout: 30,
   };
+
+  private  temperatureQueue = new dataQueue()
+  private humidityQueue = new dataQueue()
   /**
    * 连接服务器
    * @param mqttAsyncClient
@@ -61,12 +66,34 @@ class MulSensorViewModel{
    * @param mqttAsyncClient
    * @returns
    */
-  GetMessages(mqttAsyncClient:MqttClient,sensor: MulSensor){
+  GetMessages(mqttAsyncClient:MqttClient,sensor: MulSensor,
+    temperatures: string[],humidities: string[],seriesOption: Options){
     mqttAsyncClient.messageArrived((err: Error, data: MqttMessage) => {
       let msg = JSON.parse(data.payload)
       console.warn("收到数据"+JSON.stringify(data.payload));
       sensor.temperature = (msg as object)?.["Temperature"]
       sensor.humidity = (msg as object)?.["Humidity"]
+
+      this.temperatureQueue.push(sensor.temperature)
+      this.temperatureQueue.pop()
+      temperatures = this.temperatureQueue.getData()
+
+      this.humidityQueue.push(sensor.humidity)
+      this.humidityQueue.pop()
+      humidities = this.humidityQueue.getData()
+
+      seriesOption.setVal({
+        series: [
+          {
+            name:'温度',
+            data:temperatures
+          },
+          {
+            name:'湿度',
+            data:humidities
+          }
+        ]
+      })
     });
   }
   /**
