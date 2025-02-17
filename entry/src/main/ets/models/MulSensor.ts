@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> hm5.0
 export class MulSensor{
   private _temperature: string = '';
 
