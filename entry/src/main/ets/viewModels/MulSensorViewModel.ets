@@ -1,29 +1,18 @@
-import { MqttAsync,
-  MqttClient,
-  MqttConnectOptions, MqttMessage,
-  MqttPublishOptions,
-  MqttResponse, MqttSubscribeOptions } from '@ohos/mqtt';
+import { MqttClient, MqttConnectOptions, MqttMessage, MqttResponse, MqttSubscribeOptions } from '@ohos/mqtt';
 import { JSON } from '@kit.ArkTS';
-import {MulSensor} from '../models/MulSensor'
+import { MulSensor } from '../models/MulSensor';
 
-const Url:string="ws://8.138.47.246:8083"
 const UserName: string = "shmqtt";
-const ClientId: string = "harmonyOSTestDevice";
 const Password: string = "12345678";
-const UpLoadsubscribeOption: MqttSubscribeOptions = {
-  topic: "SH2846_UpLoad",
-  qos: 1
-}
-const DownLoadsubscribeOption: MqttSubscribeOptions = {
-  topic: "SH2846_DownLoad",
-  qos: 1
-}
-
 
 class MulSensorViewModel{
-
-  connectOptions: MqttConnectOptions = {
-  //set userName and password
+  /**
+   * mqtt连接配置，包括：
+   * 用户名
+   * 密码
+   * 超时
+   */
+  private connectOptions: MqttConnectOptions = {
   userName: UserName,
   password: Password,
   connectTimeout: 30,
@@ -54,13 +43,26 @@ class MulSensorViewModel{
     }
   }
   /**
+   * 取消订阅
+   * @param mqttAsyncClient
+   * @param subscribeOptions
+   */
+  async UnsubscribeTopic(mqttAsyncClient:MqttClient, subscribeOptions:MqttSubscribeOptions){
+    if(await mqttAsyncClient.isConnected()){
+      mqttAsyncClient.unsubscribe(subscribeOptions).then((data:MqttResponse)=>{
+        console.warn("取消订阅成功"+ JSON.stringify(data));
+      }).catch((err:MqttResponse)=>{
+        console.warn("取消订阅失败"+ JSON.stringify(err));
+      })
+    }
+  }
+  /**
    * 接收消息回调
    * @param mqttAsyncClient
    * @returns
    */
   GetMessages(mqttAsyncClient:MqttClient,sensor: MulSensor){
     mqttAsyncClient.messageArrived((err: Error, data: MqttMessage) => {
-      // to do Something
       let msg = JSON.parse(data.payload)
       console.warn("收到数据"+JSON.stringify(data.payload));
       sensor.temperature = (msg as object)?.["Temperature"]

@@ -30,20 +30,73 @@
  * 未经事先书面许可，不得使用开发者或贡献者的名称来认可或推广从本软件派生出来的产品。
  */
 
+import { Header } from '../components/Headers'
+import mqttClientSingleton from '../common/MqttClientManager'
+import MulSensorViewModel from '../viewModels/MulSensorViewModel'
+import { MqttSubscribeOptions } from '@ohos/mqtt'
+import { MulSensor } from '../models/MulSensor'
+
+const UpLoadsubscribeOption: MqttSubscribeOptions = {
+  topic: "SH2846_UpLoad",
+  qos: 1
+}
+const DownLoadsubscribeOption: MqttSubscribeOptions = {
+  topic: "SH2846_DownLoad",
+  qos: 1
+}
+
 @Entry
 @Component
 struct DetailPage {
   @State message: string = 'Hello World'
+  @State sensor: MulSensor = new MulSensor()
+  /**
+   * 进入DetailPage时执行订阅操作
+   * @returns
+   */
+  async onPageShow(): Promise<void> {
+    console.warn("onPageShow执行")
+    //订阅主题
+    await MulSensorViewModel.SubscribeTopic(mqttClientSingleton, DownLoadsubscribeOption)
+    await MulSensorViewModel.SubscribeTopic(mqttClientSingleton, UpLoadsubscribeOption)
+    //设置回调
+    MulSensorViewModel.GetMessages(mqttClientSingleton, this.sensor)
+  }
+  /**
+   * 退出详细页时取消订阅
+   * @returns
+   */
+  async onPageHide(): Promise<void> {
+    console.warn("onPageHide执行")
+    await MulSensorViewModel.UnsubscribeTopic(mqttClientSingleton,DownLoadsubscribeOption)
+    await MulSensorViewModel.UnsubscribeTopic(mqttClientSingleton,UpLoadsubscribeOption)
+  }
   //这是数据指标的详情页，展示温度、湿度等数据
   build() {
-    Row() {
+    Scroll() {
       Column() {
-        Text(this.message)
-          .fontSize(50)
-          .fontWeight(FontWeight.Bold)
+        Header({ title: '详细信息' })
+
+        Row() {
+          Column() {
+            Text(this.message)
+              .fontSize(50)
+              .fontWeight(FontWeight.Bold)
+
+            Row() {
+              Text("温度：").fontSize(24)
+              Text(this.sensor.temperature).fontSize(24)
+              Text("℃").fontSize(24)
+            }.width(300).padding(8)
+
+            Row() {
+              Text("湿度：").fontSize(24)
+              Text(this.sensor.humidity).fontSize(24)
+              Text("%").fontSize(24)
+            }.width(300).padding(8)
+          }
+        }.width('100%')
       }
-      .width('100%')
     }
-    .height('100%')
   }
 }

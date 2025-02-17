@@ -31,5 +31,28 @@
  */
 
 
-
 //这里是卡片自定义组件，包含在Home文件中
+@Component
+export struct Cards{
+  name: String = ""
+  connentionState: boolean = false
+  onClickFunc: ()=>void = () =>{}
+  build() {
+    Column(){
+      Text("卡片")
+        .fontSize(24)
+        .fontWeight(FontWeight.Bold)
+      Image(this.connentionState == false? $r('app.media.icloud_slash') : $r('app.media.icloud'))
+        .width(48)
+        .height(48)
+    }.width(160)
+    .height(160)
+    .margin(8)
+    .padding(8)
+    .backgroundColor('#FFF')
+    .justifyContent(FlexAlign.Start)
+    .alignItems(HorizontalAlign.Start)
+    .borderRadius(10)
+    .onClick(this.onClickFunc)
+  }
+}

@@ -2,13 +2,30 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 
+import mqttClientSingleton from '../common/MqttClientManager'
+import MulSensorViewModel from '../viewModels/MulSensorViewModel'
+
 export default class EntryAbility extends UIAbility {
-  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+  /**
+   * 在onCreate中进行连接服务器操作
+   * @param want
+   * @param launchParam
+   * @returns
+   */
+  async onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): Promise<void> {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
+      console.warn("EntryAbility--onCreate执行")
+      await MulSensorViewModel.ConnectToServer(mqttClientSingleton)
   }
 
-  onDestroy(): void {
+  /**
+   * 在onDestroy中进行断开服务器操作
+   * @returns
+   */
+  async onDestroy(): Promise<void> {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onDestroy');
+    console.warn("EntryAbility--onDestroy执行")
+    await MulSensorViewModel.DisConnectFromServer(mqttClientSingleton)
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {

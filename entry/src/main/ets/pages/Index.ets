@@ -30,64 +30,11 @@
  * 未经事先书面许可，不得使用开发者或贡献者的名称来认可或推广从本软件派生出来的产品。
  */
 
-import { MqttSubscribeOptions,MqttAsync } from '@ohos/mqtt';
-import {home} from '../Views/Home'
-import { MulSensor } from '../models/MulSensor';
-import MulSensorViewModel from '../viewModels/MulSensorViewModel'
-
-const Url:string="ws://8.138.47.246:8083"
-const ClientId: string = "harmonyOSTestDevice";
-const UpLoadsubscribeOption: MqttSubscribeOptions = {
-  topic: "SH2846_UpLoad",
-  qos: 1
-}
-const DownLoadsubscribeOption: MqttSubscribeOptions = {
-  topic: "SH2846_DownLoad",
-  qos: 1
-}
+import { home } from '../Views/Home';
 
 @Entry
 @Component
 struct Index {
-  //创建mqtt客户端
-  // mqttAsyncClient = MqttAsync.createMqtt({
-  //   url: Url,
-  //   clientId: ClientId,
-  //   persistenceType: 1,
-  // })
-  // @State message: string = 'aaa'
-  // @State sensor: MulSensor = new MulSensor()
-  //
-  // async aboutToAppear(): Promise<void> {
-  //   console.warn("aboutToAppear执行")
-  //   //连接服务器
-  //   await MulSensorViewModel.ConnectToServer(this.mqttAsyncClient)
-  //   //订阅主题
-  //   await MulSensorViewModel.SubscribeTopic(this.mqttAsyncClient,DownLoadsubscribeOption)
-  //   await MulSensorViewModel.SubscribeTopic(this.mqttAsyncClient,UpLoadsubscribeOption)
-  //   //设置回调
-  //   MulSensorViewModel.GetMessages(this.mqttAsyncClient,this.sensor)
-  // }
-
-  // build() {
-
-  //tab组件写在index文件里面
-  //tabComponent要新建文件在Views里面
-  // Row() {
-  //   Column() {
-  //     Text(this.message)
-  //       .fontSize(50)
-  //       .fontWeight(FontWeight.Bold)
-  //     Row(){
-  //       Text("温度：").fontSize(24)
-  //       Text(this.sensor.temperature).fontSize(24)
-  //       Text("℃").fontSize(24)
-  //     }.width(300).padding(8)
-  //     Row(){
-  //       Text("湿度：").fontSize(24)
-  //       Text(this.sensor.humidity).fontSize(24)
-  //       Text("%").fontSize(24)
-  //     }.width(300).padding(8)
   @State currentIndex: number = 0
   private tabsController: TabsController = new TabsController()
   build() {
