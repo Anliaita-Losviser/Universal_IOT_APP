@@ -35,6 +35,7 @@ import mqttClientSingleton from '../common/MqttClientManager'
 import MulSensorViewModel from '../viewModels/MulSensorViewModel'
 import { MqttSubscribeOptions } from '@ohos/mqtt'
 import { MulSensor } from '../models/MulSensor'
+import { McLineChart, Options } from '@mcui/mccharts'
 
 const UpLoadsubscribeOption: MqttSubscribeOptions = {
   topic: "SH2846_UpLoad",
@@ -49,7 +50,76 @@ const DownLoadsubscribeOption: MqttSubscribeOptions = {
 @Entry
 @Component
 struct DetailPage {
-  @State message: string = 'Hello World'
+  @State temperatures: string[] = ['']
+  @State humidities: string[] = ['']
+  @State seriesOption: Options = new Options({
+    xAxis:{
+      axisLabel: {  // x轴文本标签样式
+        color: '#000000',
+        fontWeight: '600',
+        fontSize: 24,
+      },
+      data:['1','2','3','4','5','6','7']
+    },
+    yAxis:[
+      {
+        name: '温度/°C',
+        nameTextStyle: { // 名称样式
+          color: '#000000'  ,
+          fontWeight: 'normal',
+          fontSize: 36,
+        },
+        axisLabel: {  // x轴文本标签样式
+          color: '#bf19ff',
+          fontWeight: '600',
+          fontSize: 24,
+          formatter: (name: string) => { // 自定义文本标签
+            return name + '°C'
+          }
+        },
+        min:-20,
+        max:100,
+        splitLine: {
+          show: false
+        }
+      },
+      {
+        name: '湿度/%',
+        nameTextStyle: { // 名称样式
+          color: '#000000'  ,
+          fontWeight: 'normal',
+          fontSize: 36,
+        },
+        axisLabel: {  // x轴文本标签样式
+          color: '#bf19ff',
+          fontWeight: '600',
+          fontSize: 24,
+          formatter: (name: string) => { // 自定义文本标签
+            return name + '%'
+          }
+        },
+        position: 'right',
+        min:0,
+        max:100,
+        splitLine: {
+          show: false
+        }
+      }
+    ],
+    series:[
+      {
+        name: '温度',
+        color:'#ffe02626',
+        data: this.temperatures
+      },
+      {
+        name: '湿度',
+        color:'#ff104ecd',
+        data: this.humidities,
+        yAxisIndex: 1
+      }
+    ]
+  })
   @State sensor: MulSensor = new MulSensor()
   /**
    * 进入DetailPage时执行订阅操作
@@ -61,7 +131,8 @@ struct DetailPage {
     await MulSensorViewModel.SubscribeTopic(mqttClientSingleton, DownLoadsubscribeOption)
     await MulSensorViewModel.SubscribeTopic(mqttClientSingleton, UpLoadsubscribeOption)
     //设置回调
-    MulSensorViewModel.GetMessages(mqttClientSingleton, this.sensor)
+    MulSensorViewModel.GetMessages(mqttClientSingleton, this.sensor,
+    this.temperatures,this.humidities,this.seriesOption)
   }
   /**
    * 退出详细页时取消订阅
@@ -77,26 +148,23 @@ struct DetailPage {
     Scroll() {
       Column() {
         Header({ title: '详细信息' })
-
-        Row() {
           Column() {
-            Text(this.message)
-              .fontSize(50)
-              .fontWeight(FontWeight.Bold)
+            McLineChart({
+              options: this.seriesOption
+            }).height(384)
 
             Row() {
-              Text("温度：").fontSize(24)
+              Text("实时温度：").fontSize(24)
               Text(this.sensor.temperature).fontSize(24)
-              Text("℃").fontSize(24)
+              Text("°C").fontSize(24)
             }.width(300).padding(8)
 
             Row() {
-              Text("湿度：").fontSize(24)
+              Text("实时湿度：").fontSize(24)
               Text(this.sensor.humidity).fontSize(24)
               Text("%").fontSize(24)
             }.width(300).padding(8)
-          }
-        }.width('100%')
+          }.width('100%')
       }
     }
   }

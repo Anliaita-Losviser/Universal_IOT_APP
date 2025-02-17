@@ -5,7 +5,7 @@ import router from '@ohos.router'
  */
 @Component
 export struct Header{
-  private title: ResourceStr =""
+  title: ResourceStr =""
   build(){
     Row({space: 20}){
       Image($r('app.media.undo'))

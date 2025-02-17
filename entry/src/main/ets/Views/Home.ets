@@ -81,7 +81,11 @@ export struct home {
           Cards({name:item.name,
             connentionState:item.connentionState,
             onClickFunc:item.onClickFunc})
+<<<<<<< HEAD
         })
+=======
+        },)
+>>>>>>> main
       }
       .width('100%')
       .backgroundColor('#F5F5F5')

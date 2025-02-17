@@ -1,4 +1,3 @@
-
 export class MulSensor{
   private _temperature: string = '';
 
