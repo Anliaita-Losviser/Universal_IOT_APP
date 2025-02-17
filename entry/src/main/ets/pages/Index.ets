@@ -29,7 +29,9 @@
  * 以二进制形式重新分发时，必须在分发时提供的文档或其他材料中复制上述版权通知、本条件列表以及以下免责声明。
  * 未经事先书面许可，不得使用开发者或贡献者的名称来认可或推广从本软件派生出来的产品。
  */
+
 import { MqttSubscribeOptions,MqttAsync } from '@ohos/mqtt';
+import {home} from '../Views/Home'
 import { MulSensor } from '../models/MulSensor';
 import MulSensorViewModel from '../viewModels/MulSensorViewModel'
 
@@ -48,47 +50,71 @@ const DownLoadsubscribeOption: MqttSubscribeOptions = {
 @Component
 struct Index {
   //创建mqtt客户端
-  mqttAsyncClient = MqttAsync.createMqtt({
-    url: Url,
-    clientId: ClientId,
-    persistenceType: 1,
-  })
-  @State message: string = 'aaa'
-  @State sensor: MulSensor = new MulSensor()
+  // mqttAsyncClient = MqttAsync.createMqtt({
+  //   url: Url,
+  //   clientId: ClientId,
+  //   persistenceType: 1,
+  // })
+  // @State message: string = 'aaa'
+  // @State sensor: MulSensor = new MulSensor()
+  //
+  // async aboutToAppear(): Promise<void> {
+  //   console.warn("aboutToAppear执行")
+  //   //连接服务器
+  //   await MulSensorViewModel.ConnectToServer(this.mqttAsyncClient)
+  //   //订阅主题
+  //   await MulSensorViewModel.SubscribeTopic(this.mqttAsyncClient,DownLoadsubscribeOption)
+  //   await MulSensorViewModel.SubscribeTopic(this.mqttAsyncClient,UpLoadsubscribeOption)
+  //   //设置回调
+  //   MulSensorViewModel.GetMessages(this.mqttAsyncClient,this.sensor)
+  // }
 
-  async aboutToAppear(): Promise<void> {
-    console.warn("aboutToAppear执行")
-    //连接服务器
-    await MulSensorViewModel.ConnectToServer(this.mqttAsyncClient)
-    //订阅主题
-    await MulSensorViewModel.SubscribeTopic(this.mqttAsyncClient,DownLoadsubscribeOption)
-    await MulSensorViewModel.SubscribeTopic(this.mqttAsyncClient,UpLoadsubscribeOption)
-    //设置回调
-    MulSensorViewModel.GetMessages(this.mqttAsyncClient,this.sensor)
-  }
+  // build() {
+
+  //tab组件写在index文件里面
+  //tabComponent要新建文件在Views里面
+  // Row() {
+  //   Column() {
+  //     Text(this.message)
+  //       .fontSize(50)
+  //       .fontWeight(FontWeight.Bold)
+  //     Row(){
+  //       Text("温度：").fontSize(24)
+  //       Text(this.sensor.temperature).fontSize(24)
+  //       Text("℃").fontSize(24)
+  //     }.width(300).padding(8)
+  //     Row(){
+  //       Text("湿度：").fontSize(24)
+  //       Text(this.sensor.humidity).fontSize(24)
+  //       Text("%").fontSize(24)
+  //     }.width(300).padding(8)
 
   build() {
+    Tabs({ barPosition: BarPosition.End }) {
+      TabContent() {
+        home()
 
-    //tab组件写在index文件里面
-    //tabComponent要新建文件在Views里面
-    Row() {
-      Column() {
-        Text(this.message)
-          .fontSize(50)
-          .fontWeight(FontWeight.Bold)
-        Row(){
-          Text("温度：").fontSize(24)
-          Text(this.sensor.temperature).fontSize(24)
-          Text("℃").fontSize(24)
-        }.width(300).padding(8)
-        Row(){
-          Text("湿度：").fontSize(24)
-          Text(this.sensor.humidity).fontSize(24)
-          Text("%").fontSize(24)
-        }.width(300).padding(8)
       }
-      .width('100%')
+      .tabBar(this.TabBuilder('首页', $r('app.media.icon'), 0))
+
+      TabContent() {
+        Text('我的')
+      }
+      .tabBar(this.TabBuilder('我的', $r('app.media.icon'), 1))
     }
+    .width('100%')
     .height('100%')
+    .vertical(false)
+  }
+
+  @Builder
+  TabBuilder(title: string, image: ResourceStr, index: Number) {
+    Column({ space: 4 }) {
+      Image(image)
+        .width(25)
+        .height(25)
+      Text(title)
+    }
+    .justifyContent(FlexAlign.Center)
   }
 }
