@@ -12,7 +12,8 @@
     "deviceTypes": [
       "phone",
       "tablet",
-      "2in1"
+      "2in1",
+      "car"
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
@@ -20,7 +21,7 @@
     "abilities": [
       {
         "name": "EntryAbility",
-        "srcEntry": "./ets/entryability/EntryAbility.ts",
+        "srcEntry": "./ets/entryability/EntryAbility.ets",
         "description": "$string:EntryAbility_desc",
         "icon": "$media:layered_image",
         "label": "$string:EntryAbility_label",
