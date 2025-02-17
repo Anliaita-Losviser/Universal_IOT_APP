@@ -1,7 +1,7 @@
 
 import {MqttAsync, MqttClient } from '@ohos/mqtt';
 
-const Url:string="replace with your mqtt broker"
+const Url:string="ws://8.138.47.246:8083"
 const ClientId: string = "harmonyOSTestAPP";
 
 class MqttClientManager {

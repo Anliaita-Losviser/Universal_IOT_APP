@@ -30,7 +30,6 @@
  * 未经事先书面许可，不得使用开发者或贡献者的名称来认可或推广从本软件派生出来的产品。
  */
 
-
 //这是包含在TabContent中的首页组件
 import router from '@ohos.router'
 import {Cards} from '../Views/Cards'
@@ -82,7 +81,7 @@ export struct home {
           Cards({name:item.name,
             connentionState:item.connentionState,
             onClickFunc:item.onClickFunc})
-        },)
+        })
       }
       .width('100%')
       .backgroundColor('#F5F5F5')

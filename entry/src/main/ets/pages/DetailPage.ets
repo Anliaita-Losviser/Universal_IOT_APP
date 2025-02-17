@@ -37,11 +37,12 @@ import { MqttSubscribeOptions } from '@ohos/mqtt'
 import { MulSensor } from '../models/MulSensor'
 
 const UpLoadsubscribeOption: MqttSubscribeOptions = {
-  topic: "your_topic",
+  topic: "SH2846_UpLoad",
   qos: 1
 }
+
 const DownLoadsubscribeOption: MqttSubscribeOptions = {
-  topic: "your_topic",
+  topic: "SH2846_DownLoad",
   qos: 1
 }
 
