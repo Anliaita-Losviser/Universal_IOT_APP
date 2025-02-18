@@ -1,18 +1,5 @@
 /*
- * Copyright [yyyy] [owner of project]
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- *
+ * Copyright 2024 - 2025 华南理工大学 学生研究计划(SRP)项目组-基于鸿蒙的物联网采集系统设计
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -28,21 +15,30 @@
  * 重新分发源代码时，必须保留上述版权通知、本条件列表以及以下免责声明。
  * 以二进制形式重新分发时，必须在分发时提供的文档或其他材料中复制上述版权通知、本条件列表以及以下免责声明。
  * 未经事先书面许可，不得使用开发者或贡献者的名称来认可或推广从本软件派生出来的产品。
+ *
+ * Disclaimer
+ * This software is provided "as is" without any express or implied warranty,
+ * including but not limited to the warranties of merchantability,
+ * fitness for a particular purpose, and non-infringement.
+ * The risk of using this software lies with the user. The developers or contributors shall not be liable for any direct,
+ * indirect, incidental, special, exemplary, or consequential damages resulting from the use of this software.
+ * To the maximum extent permitted by law, the developers or contributors shall not be responsible for any claims,
+ * losses, liabilities, damages, costs, or expenses arising from the use or inability to use this software.
+ * 免责声明
+ * 本软件按“现状”提供，不附带任何形式的明示或暗示保证，包括但不限于对适销性、特定用途的适用性或非侵权性的保证。
+ * 使用本软件的风险由用户自行承担。开发者或贡献者不对因使用本软件而导致的任何直接、间接、偶然、特殊、惩戒性或后果性损害承担任何责任。
+ * 在法律允许的最大范围内，开发者或贡献者对于因使用或无法使用本软件而产生的任何索赔、损失、责任、损害、成本或费用均不承担责任。
  */
 
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 //这里是卡片自定义组件，包含在Home文件中
 @Component
 export struct Cards{
-  name: String = ""
+  name: ResourceStr = ""
   connentionState: boolean = false
   onClickFunc: ()=>void = () =>{}
   build() {
     Column(){
-      Text("卡片")
+      Text(this.name)
         .fontSize(24)
         .fontWeight(FontWeight.Bold)
       Image(this.connentionState == false? $r('app.media.icloud_slash') : $r('app.media.icloud'))

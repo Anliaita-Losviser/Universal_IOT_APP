@@ -1,2 +1,34 @@
 <?xml version="1.0" standalone="no"?>
+<!--
+  - Copyright 2024 - 2025 华南理工大学 学生研究计划(SRP)项目组-基于鸿蒙的物联网采集系统设计
+  -
+  - Redistribution and use in source and binary forms, with or without
+  - modification, are permitted provided that the following conditions are met:
+  - Redistributions of source code must retain the above copyright notice,
+  - this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+  - notice, this list of conditions and the following disclaimer in the
+  - documentation and/or other materials provided with the distribution.
+  - Neither the name of the developer nor the names of its
+  - contributors may be used to endorse or promote products derived from
+  - this software without specific prior written permission.
+  - 重新分发和使用源代码和二进制形式的代码，无论是否进行修改，都是允许的，只要满足以下条件：
+  - 重新分发源代码时，必须保留上述版权通知、本条件列表以及以下免责声明。
+  - 以二进制形式重新分发时，必须在分发时提供的文档或其他材料中复制上述版权通知、本条件列表以及以下免责声明。
+  - 未经事先书面许可，不得使用开发者或贡献者的名称来认可或推广从本软件派生出来的产品。
+  -
+  - Disclaimer
+  - This software is provided "as is" without any express or implied warranty,
+  - including but not limited to the warranties of merchantability,
+  - fitness for a particular purpose, and non-infringement.
+  - The risk of using this software lies with the user. The developers or contributors shall not be liable for any direct,
+  - indirect, incidental, special, exemplary, or consequential damages resulting from the use of this software.
+  - To the maximum extent permitted by law, the developers or contributors shall not be responsible for any claims,
+  - losses, liabilities, damages, costs, or expenses arising from the use or inability to use this software.
+  - 免责声明
+  - 本软件按“现状”提供，不附带任何形式的明示或暗示保证，包括但不限于对适销性、特定用途的适用性或非侵权性的保证。
+  - 使用本软件的风险由用户自行承担。开发者或贡献者不对因使用本软件而导致的任何直接、间接、偶然、特殊、惩戒性或后果性损害承担任何责任。
+  - 在法律允许的最大范围内，开发者或贡献者对于因使用或无法使用本软件而产生的任何索赔、损失、责任、损害、成本或费用均不承担责任。
+  -->
+
 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><rect width="48" height="48" opacity="0"></rect><g><path d="M19.82 25.78Q22.03 25.78 23.88 24.7Q25.73 23.62 26.83 21.77Q27.94 19.92 27.94 17.71Q27.94 15.5 26.83 13.66Q25.73 11.81 23.88 10.73Q22.03 9.65 19.82 9.65Q17.62 9.65 15.77 10.73Q13.92 11.81 12.84 13.66Q11.76 15.5 11.76 17.71Q11.76 19.92 12.84 21.77Q13.92 23.62 15.77 24.7Q17.62 25.78 19.82 25.78ZM19.82 12.62Q21.22 12.62 22.39 13.3Q23.57 13.97 24.24 15.14Q24.91 16.32 24.91 17.71Q24.91 19.1 24.24 20.26Q23.57 21.41 22.39 22.1Q21.22 22.8 19.82 22.8Q17.76 22.8 16.27 21.31Q14.78 19.82 14.78 17.71Q14.78 16.32 15.46 15.14Q16.13 13.97 17.28 13.3Q18.43 12.62 19.82 12.62ZM21.17 30.29Q23.76 30.29 26.38 31.61Q28.99 32.93 30.67 35.16Q32.35 37.39 32.35 39.98Q32.35 40.51 31.97 40.9Q31.58 41.28 31.06 41.28L8.59 41.28Q8.06 41.28 7.68 40.9Q7.3 40.51 7.3 39.98Q7.3 37.39 8.98 35.16Q10.66 32.93 13.27 31.61Q15.89 30.29 18.48 30.29L21.17 30.29ZM31.06 44.26Q32.83 44.26 34.1 43.01Q35.38 41.76 35.38 39.98Q35.38 36.53 33.26 33.6Q31.15 30.67 27.84 28.99Q24.53 27.31 21.17 27.31L18.53 27.31Q15.17 27.31 11.86 28.99Q8.54 30.67 6.43 33.6Q4.32 36.53 4.32 39.98Q4.32 41.76 5.57 43.01Q6.82 44.26 8.59 44.26L31.06 44.26Z" fill="rgba(0,0,0,1)"></path><path d="M29.86 21.41Q29.52 22.22 29.09 22.99Q28.66 23.76 28.13 24.38L29.52 24.38Q32.11 24.38 34.73 25.68Q37.34 26.98 39.02 29.21Q40.7 31.44 40.7 34.08Q40.7 34.61 40.32 34.99Q39.94 35.38 39.41 35.38L37.06 35.38Q37.58 36.72 37.82 38.35L39.41 38.35Q41.18 38.35 42.43 37.1Q43.68 35.86 43.68 34.08Q43.68 30.67 41.64 27.79Q39.6 24.91 36.38 23.21Q33.17 21.5 29.86 21.41ZM24.58 8.21Q25.3 7.49 26.23 7.1Q27.17 6.72 28.18 6.72Q29.57 6.72 30.72 7.39Q31.87 8.06 32.57 9.24Q33.26 10.42 33.26 11.76Q33.26 13.25 32.47 14.47Q31.68 15.7 30.38 16.32L30.38 16.51Q30.53 17.66 30.53 18.22Q30.53 18.77 30.34 19.54Q32.02 19.06 33.36 17.93Q34.7 16.8 35.47 15.19Q36.24 13.58 36.24 11.76Q36.24 9.6 35.14 7.75Q34.03 5.9 32.18 4.82Q30.34 3.74 28.13 3.74Q26.11 3.74 24.36 4.68Q22.61 5.62 21.5 7.2Q22.8 7.44 23.76 7.82Q24.19 8.02 24.58 8.21Z" fill="rgba(0,0,0,1)"></path></g></svg>
